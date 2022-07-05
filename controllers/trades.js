@@ -1,4 +1,5 @@
 const Trade = require("../models/trade");
+const request = require('request');
 
 function signUp(req, res) {
   res.render("signup", { title: "Sign Up" });
@@ -10,6 +11,7 @@ function login(req, res) {
 
 function trade(req, res) {
   Trade.find({}, function (err, trades) {
+
     res.render("trades/trades", { trades });
   });
 }
@@ -25,7 +27,12 @@ function newTrade(req, res) {
   const dt = tradesD.openDate;
   const tradeDate = dt.toISOString().slice(0, 10);
   console.log(tradeDate);
-  res.render("trades/new", { tradeDate });
+  request(
+    `https://api.binance.com/api/v3/exchangeInfo`,
+    function(err, response, body) {
+     const cryptoData = JSON.parse(body);
+     res.render("trades/new", { tradeDate, cryptoData });
+    });
 }
 
 function create(req, res) {
@@ -33,12 +40,15 @@ function create(req, res) {
   req.body.closePrice = parseInt(req.body.closePrice);
   req.body.quantity = parseInt(req.body.quantity);
   req.body.fees = parseInt(req.body.fees);
-
-  const trades = new Trade(req.body);
-
-  trades.save(function (err) {
+  
+request(
+    `https://api.binance.com/api/v3/exchangeInfo`,
+    function(err, response, body) {
+     const cryptoData = JSON.parse(body);
+     const trades = new Trade(req.body);
+     trades.save(function (err) {
     if (err) return res.render("trades/new");
-    res.redirect("/trades/trades");
+    res.redirect("/trades/trades");});
   });
 }
 
@@ -63,8 +73,13 @@ function update(req, res) {
     trade.closeDate = req.body.closeDate;
     trade.closePrice = req.body.closePrice;
     trade.fees = req.body.fees;
-    trade.save(function (err) {
-      res.redirect("/trades/trades");
+    request(
+      `https://api.binance.com/api/v3/exchangeInfo`,
+      function(err, response, body) {
+       const cryptoData = JSON.parse(body);
+       const trades = new Trade(req.body);
+       trades.save(function (err) {
+      res.redirect("/trades/trades", );});
     });
   });
 }
@@ -76,7 +91,14 @@ function edit(req, res) {
   const tradeDateOpen = dtOpen.toISOString().slice(0, 10);
   const dtClose = tradesD.closeDate;
   const tradeDateClose = dtClose.toISOString().slice(0, 10);
-    res.render("trades/edit", { trade, tradeDateOpen, tradeDateClose});
+  request(
+    `https://api.binance.com/api/v3/exchangeInfo`,
+    function(err, response, body) {
+     const cryptoData = JSON.parse(body);
+     const trades = new Trade(req.body);
+     trades.save(function (err) {
+      res.render("trades/edit", { trade, tradeDateOpen, tradeDateClose, cryptoData});});
+  });
   });
 }
 

@@ -31,8 +31,6 @@ const tradeSchema = new Schema(
     pair: {
       type: String,
       required: true,
-      enum: ["BTC/USD", "ETH/USD", "XRP/USD"],
-      default: "BTC/USD",
     },
     openDate: {
       required: true,

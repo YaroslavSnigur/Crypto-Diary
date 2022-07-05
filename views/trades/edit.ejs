@@ -23,14 +23,16 @@
           <option value="Opened">Opened</option>
         </select> </label
       ><br />
-      <label for="pair"
+      <label
         >Pair:
-        <select name="pair" value="<%= trade.pair %>">
-          <option value="BTC/USD">BTC/USD</option>
-          <option value="ETH/USD">ETH/USD</option>
-          <option value="XRP/USD">XRP/USD</option>
-        </select></label
-      ><br />
+        <input type="text" name="pair" list="pair_list">
+        <datalist id="pair_list">
+            <% cryptoData.symbols.forEach(function(p) { %>
+              <option value="<%= p.symbol %>"><%= p.symbol %></option>
+              <% }); %>
+            </datalist>
+          </label>
+      <br />
       <label for="openDate"
         >Open Date:
         <input type="date" name="openDate" value= <%= tradeDateOpen %> /> </label

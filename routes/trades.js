@@ -14,14 +14,4 @@ router.delete("/trades/:id", tradesCtrl.delete);
 router.put("/trades/:id", tradesCtrl.update);
 router.get("/trades/:id/edit", tradesCtrl.edit);
 
-router.get('/', function(req, res, next) {
-    request(
-      `https://api.binance.com/api/v3/exchangeInfo`,
-      function(err, response, body) {
-        data = JSON.parse(body);
-        res.render('index', {data});
-      }
-    );
-  });
-
 module.exports = router;
