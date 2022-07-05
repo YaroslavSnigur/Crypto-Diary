@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trades</title>
+  </head>
+  <body>
+    <h1>Trades</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Status</th>
+          <th>Pair</th>
+          <th>Open Date</th>
+          <th>Open Price</th>
+          <th>Quantity</th>
+          <th>Close Date</th>
+          <th>Close Price</th>
+          <th>Fees Paid</th>
+          <th>P/L USD</th>
+          <th>P/L %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let pl = 0 %> <% let pr = 0 %> <% trades.forEach(function(t) { %>
+        <tr>
+          <td><%= t.position %></td>
+          <td><%= t.stat %></td>
+          <td><%= t.pair %></td>
+          <td><%= t.openDate.toLocaleDateString() %></td>
+          <td><%= t.openPrice %></td>
+          <td><%= t.quantity %></td>
+          <td><%= t.closeDate.toLocaleDateString() %></td>
+          <td><%= t.closePrice %></td>
+          <td><%= t.fees %></td>
+          <% pl = (t.closePrice - t.openPrice) * t.quantity %>
+          <td><%= pl - t.fees %></td>
+          <% pr = (pl - t.fees)/(t.openPrice*t.quantity) * 100 %>
+          <td><%= Math.floor(pr) %>%</td>
+          <td><a href="/trades/<%= t._id %>">DETAILS</a></td>
+          <td><a href="/trades/<%= t._id %>/edit">EDIT</a></td>
+          <td>
+            <form action="/trades/<%= t._id %>/?_method=delete" method="POST">
+              <button>X</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade</title>
+</head>
+<body>
+    <h1>Trade</h1>
+    <section>
+        <div>Position:</div>
+        <div><%= trade.position %></div>
+        <div>Status:</div>
+        <div><%= trade.stat %></div>
+        <div>Pair:</div>
+        <div><%= trade.pair %></div>
+        <div>Open Date:</div>
+        <div><%= trade.openDate.toLocaleDateString() %></div>
+        <div>Open Price:</div>
+        <div><%= trade.openPrice %></div>
+        <div>Quantity:</div>
+        <div><%= trade.quantity %></div>
+        <div>Close Date:</div>
+        <div><%= trade.closeDate.toLocaleDateString() %></div>
+        <div>Close Price:<div>
+        <div><%= trade.closePrice %></div>
+        <div>Fees Paid:</div>
+        <div><%= trade.fees %></div>
+        <div><a href="/trades/<%= trade._id %>/edit">EDIT</a><div>
+      </section>
+      <br />
+
+
+<h2>Comments:</h2>
+<% if (trade.comments.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Date created:</th>
+        <th>Text:</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% trade.comments.sort((a, b) => a.createdAt - b.createdAt) %>
+      <% trade.comments.forEach(function(t) { %>
+      <tr>
+        <td><%= t.createdAt.toLocaleDateString() %></td>
+        <td><%= t.content %></d></td>
+        <td> 
+            <form
+            action="/trades/<%= trade._id %>/comments/<%= t._id %>?_method=delete"
+            method="POST"
+          >
+            <button>X</button>
+          </form></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <% } else { %>
+  <h5>No Comments Yet</h5>
+  <% } %>
+  <br />
+  <h2>Add Comment</h2>
+<form
+  method="POST"
+  action="/trades/<%= trade._id %>/comments"
+>
+  <textarea name="content"></textarea>
+  <input type="submit" value="Add Comment" />
+</form>
+</body>
+</html>

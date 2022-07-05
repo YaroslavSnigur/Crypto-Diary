@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update</title>
+  </head>
+  <body>
+    <h2>Update Your Trade</h2>
+    <form action="/trades/<%= trade._id %>?_method=PUT" method="POST">
+      <label for="position"
+        >Position:
+        <select name="position" value="<%= trade.position %>">
+          <option value="Long">Long</option>
+          <option value="Short">Short</option>
+        </select> </label
+      ><br />
+      <label for="stat"
+        >Status:
+        <select name="stat" value="<%= trade.stat %>">
+          <option value="Closed">Closed</option>
+          <option value="Opened">Opened</option>
+        </select> </label
+      ><br />
+      <label for="pair"
+        >Pair:
+        <select name="pair" value="<%= trade.pair %>">
+          <option value="BTC/USD">BTC/USD</option>
+          <option value="ETH/USD">ETH/USD</option>
+          <option value="XRP/USD">XRP/USD</option>
+        </select></label
+      ><br />
+      <label for="openDate"
+        >Open Date:
+        <input type="date" name="openDate" value= <%= tradeDateOpen %> /> </label
+      ><br />
+
+      <label for="openPrice"
+        >Open Price:
+        <input
+          type="number"
+          name="openPrice"
+          value="<%= trade.openPrice %>"
+        /> </label
+      ><br />
+
+      <label for="quantity"
+        >Quantity:
+        <input
+          type="number"
+          name="quantity"
+          value="<%= trade.quantity %>"
+        /> </label
+      ><br />
+
+      <label for="closeDate"
+        >Close Date:
+        <input type="date" name="closeDate" value= <%= tradeDateClose %> /> </label
+      ><br />
+
+      <label for="closePrice"
+        >Close Price:
+        <input
+          type="number"
+          name="closePrice"
+          value="<%= trade.closePrice %>"
+        /> </label
+      ><br />
+      <label for="fees"
+        >Fees:
+        <input type="number" name="fees" value="<%= trade.fees %>" /> </label
+      ><br />
+      <input type="submit" value="Update Trade" />
+    </form>
+  </body>
+</html>

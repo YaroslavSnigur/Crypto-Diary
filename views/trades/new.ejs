@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Enter a New Trade</h2>
+    <form action="/trades/trades" method="POST">
+      <label
+        >Position:
+        <select name="position">
+          <option value="Long" selected>Long</option>
+          <option value="Short">Short</option>
+        </select> </label
+      ><br />
+      <label
+        >Status:
+        <select name="stat">
+          <option value="Closed" selected>Closed</option>
+          <option value="Opened">Opened</option>
+        </select> </label
+      ><br />
+      <label
+        >Pair:
+          <select name="pair">
+            <option value="BTC/USD" selected>BTC/USD</option>
+            <option value="ETH/USD">ETH/USD</option>
+            <option value="XRP/USD">XRP/USD</option>
+          </select></label
+      ><br />
+      <label
+        >Open Date:
+        <input type="date" name="openDate" value= <%= tradeDate %> /> </label
+      ><br />
+
+      <label>Open Price: <input type="number" name="openPrice" /> </label><br />
+
+      <label>Quantity: <input type="number" name="quantity" /> </label><br />
+
+      <label
+        >Close Date:
+        <input type="date" name="closeDate" value= <%= tradeDate %> /> </label
+      ><br />
+
+      <label>Close Price: <input type="number" name="closePrice" /> </label
+      ><br />
+      <label>Fees: <input type="number" name="fees" /> </label
+        ><br />
+      <input type="submit" value="Add Trade" />
+    </form>
+  </body>
+</html>
