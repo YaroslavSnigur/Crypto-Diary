@@ -25,7 +25,7 @@
       ><br />
       <label
         >Pair:
-        <input type="text" name="pair" list="pair_list">
+        <input type="text" name="pair" list="pair_list" value="<%= trade.pair %>">
         <datalist id="pair_list">
             <% cryptoData.symbols.forEach(function(p) { %>
               <option value="<%= p.symbol %>"><%= p.symbol %></option>

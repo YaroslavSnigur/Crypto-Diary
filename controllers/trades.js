@@ -1,5 +1,5 @@
 const Trade = require("../models/trade");
-const request = require('request');
+const request = require("request");
 
 function signUp(req, res) {
   res.render("signup", { title: "Sign Up" });
@@ -11,7 +11,6 @@ function login(req, res) {
 
 function trade(req, res) {
   Trade.find({}, function (err, trades) {
-
     res.render("trades/trades", { trades });
   });
 }
@@ -29,27 +28,39 @@ function newTrade(req, res) {
   console.log(tradeDate);
   request(
     `https://api.binance.com/api/v3/exchangeInfo`,
-    function(err, response, body) {
-     const cryptoData = JSON.parse(body);
-     res.render("trades/new", { tradeDate, cryptoData });
-    });
+    function (err, response, body) {
+      const cryptoData = JSON.parse(body);
+      res.render("trades/new", { tradeDate, cryptoData });
+    }
+  );
 }
 
 function create(req, res) {
+  console.log(req.body);
   req.body.openPrice = parseInt(req.body.openPrice);
-  req.body.closePrice = parseInt(req.body.closePrice);
   req.body.quantity = parseInt(req.body.quantity);
-  req.body.fees = parseInt(req.body.fees);
-  
-request(
+  if (req.body.closePrice) {
+    req.body.closePrice = parseInt(req.body.closePrice);
+  } else {
+    delete req.body.closePrice;
+  }
+
+  if (req.body.fees) {
+    req.body.fees = parseInt(req.body.fees);
+  } else {
+    delete req.body.fees;
+  }
+
+  request(
     `https://api.binance.com/api/v3/exchangeInfo`,
-    function(err, response, body) {
-     const cryptoData = JSON.parse(body);
-     const trades = new Trade(req.body);
-     trades.save(function (err) {
-    if (err) return res.render("trades/new");
-    res.redirect("/trades/trades");});
-  });
+    function (err, response, body) {
+      const cryptoData = JSON.parse(body);
+      const trades = new Trade(req.body);
+      trades.save(function (err) {
+        res.redirect("/trades/trades");
+      });
+    }
+  );
 }
 
 function deleteTrade(req, res, next) {
@@ -75,30 +86,39 @@ function update(req, res) {
     trade.fees = req.body.fees;
     request(
       `https://api.binance.com/api/v3/exchangeInfo`,
-      function(err, response, body) {
-       const cryptoData = JSON.parse(body);
-       const trades = new Trade(req.body);
-       trades.save(function (err) {
-      res.redirect("/trades/trades", );});
-    });
+      function (err, response, body) {
+        const cryptoData = JSON.parse(body);
+        trade.save(function (err) {
+          res.redirect("/trades/trades");
+        });
+      }
+    );
   });
 }
 
 function edit(req, res) {
   Trade.findById(req.params.id, function (err, trade) {
-    const tradesD = new Trade();
-  const dtOpen = tradesD.openDate;
-  const tradeDateOpen = dtOpen.toISOString().slice(0, 10);
-  const dtClose = tradesD.closeDate;
-  const tradeDateClose = dtClose.toISOString().slice(0, 10);
-  request(
-    `https://api.binance.com/api/v3/exchangeInfo`,
-    function(err, response, body) {
-     const cryptoData = JSON.parse(body);
-     const trades = new Trade(req.body);
-     trades.save(function (err) {
-      res.render("trades/edit", { trade, tradeDateOpen, tradeDateClose, cryptoData});});
-  });
+    const dtOpen = trade.openDate;
+    const tradeDateOpen = dtOpen.toISOString().slice(0, 10);
+    const dtClose = trade.closeDate;
+    let tradeDateClose = null;
+    if (dtClose) {
+      tradeDateClose = dtClose.toISOString().slice(0, 10);
+    }
+    request(
+      `https://api.binance.com/api/v3/exchangeInfo`,
+      function (err, response, body) {
+        const cryptoData = JSON.parse(body);
+        trade.save(function (err) {
+          res.render("trades/edit", {
+            trade,
+            tradeDateOpen,
+            tradeDateClose,
+            cryptoData,
+          });
+        });
+      }
+    );
   });
 }
 

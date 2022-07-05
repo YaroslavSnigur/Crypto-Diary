@@ -33,13 +33,26 @@
           <td><%= t.openDate.toLocaleDateString() %></td>
           <td><%= t.openPrice %></td>
           <td><%= t.quantity %></td>
-          <td><%= t.closeDate.toLocaleDateString() %></td>
-          <td><%= t.closePrice %></td>
-          <td><%= t.fees %></td>
-          <% pl = (t.closePrice - t.openPrice) * t.quantity %>
-          <td><%= pl - t.fees %></td>
-          <% pr = (pl - t.fees)/(t.openPrice*t.quantity) * 100 %>
-          <td><%= Math.floor(pr) %>%</td>
+          <td>
+            <% if (t.closeDate) {%>
+            <%= t.closeDate.toLocaleDateString() %>
+            <% } else { %> - <% } %></td>
+          <td>
+           <%= t.closePrice %></td>
+          <td>
+              <%= t.fees %></td>
+              <% if (t.closeDate && t.closePrice) { pl = (t.closePrice - t.openPrice) * t.quantity} %>
+          <td>
+            <% if (t.closeDate && t.closePrice) {%>
+            <% pl - t.fees %>
+            <% } else { %> - <% } %>
+          </td>
+          <% if (t.closeDate && t.closePrice) pr = (pl - t.fees)/(t.openPrice*t.quantity) * 100 %>
+          <td>
+            <% if (t.closeDate && t.closePrice) {%>
+            <%= Math.floor(pr) %>
+            <% } else { %> - <% } %>
+          </td>
           <td><a href="/trades/<%= t._id %>">DETAILS</a></td>
           <td><a href="/trades/<%= t._id %>/edit">EDIT</a></td>
           <td>

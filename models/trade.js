@@ -6,13 +6,12 @@ const commentSchema = new Schema(
     content: {
       type: String,
       required: true,
+    },
   },
-},
   {
     timestamps: true,
   }
 );
-
 
 const tradeSchema = new Schema(
   {
@@ -46,17 +45,16 @@ const tradeSchema = new Schema(
       required: true,
     },
     closeDate: {
-      required: true,
       type: Date,
-      default: Date.now(),
+      default: null,
     },
     closePrice: {
       type: Number,
-      required: true,
+      default: 0,
     },
     fees: {
       type: Number,
-      required: true,
+      default: 0,
     },
     comments: [commentSchema],
   },

@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const request = require('request');
-const rootURL = 'https://api.binance.com/api/v3/exchangeInfo';
+const request = require("request");
 const tradesCtrl = require("../controllers/trades");
 
 router.get("/signup", tradesCtrl.signUp);
