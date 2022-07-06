@@ -25,32 +25,34 @@
       ><br />
       <label
         >Pair:
-        <input type="text" name="pair" list="pair_list">
+        <input type="text" name="pair" list="pair_list" />
         <datalist id="pair_list">
-            <% cryptoData.symbols.forEach(function(p) { %>
-              <option value="<%= p.symbol %>"><%= p.symbol %></option>
-              <% }); %>
-            </datalist>
-</label
+          <% cryptoData.symbols.forEach(function(p) { %>
+          <option value="<%= p.symbol %>"><%= p.symbol %></option>
+          <% }); %>
+        </datalist> </label
       ><br />
       <label
         >Open Date:
-        <input type="date" name="openDate" value= <%= tradeDate %> /> </label
+        <input type="date" name="openDate" value="<%= tradeDate %>" /> </label
       ><br />
 
       <label>Open Price: <input type="number" name="openPrice" /> </label><br />
 
       <label>Quantity: <input type="number" name="quantity" /> </label><br />
 
-      <label
-        >Close Date:
-        <input type="date" name="closeDate"/> </label
-      ><br />
+      <label>Close Date: <input type="date" name="closeDate" /> </label><br />
 
       <label>Close Price: <input type="number" name="closePrice" /> </label
       ><br />
-      <label>Fees: <input type="number" name="fees" /> </label
-        ><br />
+      <label>Fees: <input type="number" name="fees" /> </label><br />
+      <label
+      >Indicators:
+      <select name="ind" multiple>
+        <% indicators.forEach(function(i) { %>
+        <option multiple value="<%= i.name %>"><%= i.name %></option>
+        <% }); %> 
+        </label>
       <input type="submit" value="Add Trade" />
     </form>
   </body>

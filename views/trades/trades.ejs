@@ -14,6 +14,7 @@
           <th>Position</th>
           <th>Status</th>
           <th>Pair</th>
+          <th>Indicators</th>
           <th>Open Date</th>
           <th>Open Price</th>
           <th>Quantity</th>
@@ -30,28 +31,42 @@
           <td><%= t.position %></td>
           <td><%= t.stat %></td>
           <td><%= t.pair %></td>
-          <td><%= t.openDate.toLocaleDateString() %></td>
+          <td>
+            <% if (t.ind.length) { %>
+            <ul>
+              <%- t.ind.map(i => `
+              <li>${i.name}</li>
+              `).join('') %>
+            </ul>
+            <% } else { %>
+            <h5>No Indicators</h5>
+            <% } %>
+          </td>
+          <td>
+            <%= t.openDate.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %>
+          </td>
           <td><%= t.openPrice %></td>
           <td><%= t.quantity %></td>
           <td>
-            <% if (t.closeDate) {%>
-            <%= t.closeDate.toLocaleDateString() %>
-            <% } else { %> - <% } %></td>
-          <td>
-           <%= t.closePrice %></td>
-          <td>
-              <%= t.fees %></td>
-              <% if (t.closeDate && t.closePrice) { pl = (t.closePrice - t.openPrice) * t.quantity} %>
-          <td>
-            <% if (t.closeDate && t.closePrice) {%>
-            <% pl - t.fees %>
-            <% } else { %> - <% } %>
+            <% if (t.closeDate) {%> <%= t.closeDate.toLocaleDateString('en-GB',
+            {timeZone: 'UTC'}) %> <% } else { %> - <% } %>
           </td>
-          <% if (t.closeDate && t.closePrice) pr = (pl - t.fees)/(t.openPrice*t.quantity) * 100 %>
           <td>
-            <% if (t.closeDate && t.closePrice) {%>
-            <%= Math.floor(pr) %>
-            <% } else { %> - <% } %>
+            <% if (t.closePrice) {%> <%= t.closePrice %> <% } else { %> - <% }
+            %>
+          </td>
+          <td><% if (t.fees) {%> <%= t.fees %> <% } else { %> - <% } %></td>
+          <% if (t.closeDate && t.closePrice) { pl = (t.closePrice -
+          t.openPrice) * t.quantity - t.fees} %>
+          <td>
+            <% if (t.closeDate && t.closePrice) {%> <%= pl %> <% } else { %> -
+            <% } %>
+          </td>
+          <% if (t.closeDate && t.closePrice) pr = (pl -
+          t.fees)/(t.openPrice*t.quantity) * 100 %>
+          <td>
+            <% if (t.closeDate && t.closePrice) {%> <%= Math.floor(pr) %>%<% }
+            else { %> - <% } %>
           </td>
           <td><a href="/trades/<%= t._id %>">DETAILS</a></td>
           <td><a href="/trades/<%= t._id %>/edit">EDIT</a></td>

@@ -1,4 +1,5 @@
 const Trade = require("../models/trade");
+const Indicator = require("../models/indicator");
 const request = require("request");
 
 function signUp(req, res) {
@@ -10,29 +11,45 @@ function login(req, res) {
 }
 
 function trade(req, res) {
-  Trade.find({}, function (err, trades) {
-    res.render("trades/trades", { trades });
-  });
+  Trade.find({})
+    .populate("ind")
+    .exec(function (err, trades) {
+      res.render("trades/trades", { trades });
+    });
 }
 
+// function trade(req, res) {
+//   Trade.find({}, function (err, trades) {
+//     res.render("trades/trades", { trades });
+//   });
+// }
+
 function show(req, res) {
-  Trade.findById(req.params.id, function (err, trade) {
-    res.render("trades/show", { trade });
-  });
+  Trade.findOne({ _id: req.params.id })
+    .populate("ind")
+    .exec(function (err, trade) {
+      Indicator.find({ _id: { $nin: trade.ind } }, function (err, indicators) {
+        res.render("trades/show", {
+          trade,
+          indicators,
+        });
+      });
+    });
 }
 
 function newTrade(req, res) {
   const tradesD = new Trade();
   const dt = tradesD.openDate;
   const tradeDate = dt.toISOString().slice(0, 10);
-  console.log(tradeDate);
-  request(
-    `https://api.binance.com/api/v3/exchangeInfo`,
-    function (err, response, body) {
-      const cryptoData = JSON.parse(body);
-      res.render("trades/new", { tradeDate, cryptoData });
-    }
-  );
+  Indicator.find({}, function (err, indicators) {
+    request(
+      `https://api.binance.com/api/v3/exchangeInfo`,
+      function (err, response, body) {
+        const cryptoData = JSON.parse(body);
+        res.render("trades/new", { tradeDate, cryptoData, indicators });
+      }
+    );
+  });
 }
 
 function create(req, res) {
@@ -44,19 +61,17 @@ function create(req, res) {
   } else {
     delete req.body.closePrice;
   }
-
   if (req.body.fees) {
     req.body.fees = parseInt(req.body.fees);
   } else {
     delete req.body.fees;
   }
-
   request(
     `https://api.binance.com/api/v3/exchangeInfo`,
     function (err, response, body) {
       const cryptoData = JSON.parse(body);
-      const trades = new Trade(req.body);
-      trades.save(function (err) {
+      const trade = new Trade(req.body);
+      trade.save(function (err) {
         res.redirect("/trades/trades");
       });
     }

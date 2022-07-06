@@ -57,6 +57,7 @@ const tradeSchema = new Schema(
       default: 0,
     },
     comments: [commentSchema],
+    ind: [{ type: Schema.Types.ObjectId, ref: "Indicator" }],
   },
   {
     timestamps: true,

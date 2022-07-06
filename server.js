@@ -27,6 +27,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/", require("./routes/trades"));
 app.use("/", require("./routes/comments"));
+app.use("/", require("./routes/indicators"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -16,21 +16,48 @@
         <div>Pair:</div>
         <div><%= trade.pair %></div>
         <div>Open Date:</div>
-        <div><%= trade.openDate.toLocaleDateString() %></div>
+        <div><%= trade.openDate.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></div>
         <div>Open Price:</div>
         <div><%= trade.openPrice %></div>
         <div>Quantity:</div>
         <div><%= trade.quantity %></div>
         <div>Close Date:</div>
-        <div><%= trade.closeDate.toLocaleDateString() %></div>
+        <div> <% if (trade.closeDate) {%> <%= trade.closeDate.toLocaleDateString('en-GB',
+          {timeZone: 'UTC'}) %> <% } else { %> - <% } %></div>
         <div>Close Price:<div>
-        <div><%= trade.closePrice %></div>
+        <div><% if (trade.closePrice) {%> <%= trade.closePrice %> <% } else { %> - <% }
+          %></div>
         <div>Fees Paid:</div>
-        <div><%= trade.fees %></div>
+        <div><% if (trade.fees) {%> <%= trade.fees %> <% } else { %> - <% } %></div>
         <div><a href="/trades/<%= trade._id %>/edit">EDIT</a><div>
       </section>
       <br />
 
+      <div>Indicators used for trade:</div>
+      <% if (trade.ind.length) { %>
+      <ul>
+        <%- trade.ind.map(i => `
+        <li>${i.name}</li><form
+        action="/trades/${trade._id}/indicators/${i._id}?_method=delete"
+        method="POST"
+      > <button>X</button></form>
+      `).join('') %>
+      </ul>
+      <% } else { %>
+        <h5>No Indicators</h5>
+        <% } %>
+
+      <form
+  action="/trades/<%= trade._id %>/indicators"
+  method="POST"
+>
+  <select name="indicatorId">
+    <%- indicators.map(i => `
+    <option value="${i._id}">${i.name}</option>
+    `).join('') %>
+  </select>
+  <button type="submit">Add Indicators</button>
+</form>
 
 <h2>Comments:</h2>
 <% if (trade.comments.length) { %>
@@ -45,7 +72,7 @@
         <% trade.comments.sort((a, b) => a.createdAt - b.createdAt) %>
       <% trade.comments.forEach(function(t) { %>
       <tr>
-        <td><%= t.createdAt.toLocaleDateString() %></td>
+        <td><%= t.createdAt.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></td>
         <td><%= t.content %></d></td>
         <td> 
             <form

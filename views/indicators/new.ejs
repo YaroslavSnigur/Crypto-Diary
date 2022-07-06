@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      Please first ensure that the Indicator is not in the dropdown
+      <select>
+        <% indicators.forEach(function(i) { %>
+        <option><%= i.name %></option>
+        <% }) %>
+      </select>
+    </p>
+    <form action="/indicators" method="POST">
+      <label>Name:</label>
+      <input type="text" name="name" />
+      <input type="submit" value="Add Indicator" />
+    </form>
+  </body>
+</html>
