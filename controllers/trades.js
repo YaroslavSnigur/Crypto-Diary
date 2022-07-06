@@ -71,6 +71,9 @@ function create(req, res) {
     function (err, response, body) {
       const cryptoData = JSON.parse(body);
       const trade = new Trade(req.body);
+      console.log(trade);
+      console.log(req.body.ind);
+      // trade.ind.push(req.body.ind);
       trade.save(function (err) {
         res.redirect("/trades/trades");
       });

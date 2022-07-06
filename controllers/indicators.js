@@ -6,6 +6,7 @@ async function addToInd(req, res, next) {
   try {
     const trade = await Trade.findById(req.params.id);
     trade.ind.push(req.body.indicatorId);
+    console.log(req.body.indicatorId);
     await trade.save();
     res.redirect(`/trades/${trade._id}`);
   } catch (err) {
@@ -17,8 +18,17 @@ async function addToInd(req, res, next) {
 async function delInd(req, res, next) {
   try {
     const trade = await Trade.findById(req.params.id);
-    const indicator = await trade.findOne({ _id: req.params.iid });
-    await indicator.remove();
+    console.log(trade);
+    console.log(req.params.iid);
+    console.log(trade.ind[0]._id);
+    id = req.params.iid;
+    const idx = trade.ind.findIndex((t) => t.id === id);
+    if (idx === -1) {
+      return false;
+    } else {
+      trade.ind.splice(idx, 1);
+    }
+    // await indicator.remove();
     await trade.save();
     res.redirect(`/trades/${trade._id}`);
   } catch (err) {
