@@ -50,7 +50,7 @@
       >Indicators:
       <select name="ind" multiple>
         <% indicators.forEach(function(i) { %>
-        <option multiple value="<%= i.name %>"><%= i.name %></option>
+        <option multiple value="<%= i._id %>"><%= i.name %></option>
         <% }); %> 
         </label>
       <input type="submit" value="Add Trade" />

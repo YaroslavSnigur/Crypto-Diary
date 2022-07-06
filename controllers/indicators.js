@@ -22,7 +22,8 @@ async function delInd(req, res, next) {
     console.log(req.params.iid);
     console.log(trade.ind[0]._id);
     id = req.params.iid;
-    const idx = trade.ind.findIndex((t) => t.id === id);
+    const idx = trade.ind.findIndex((t) => t._id == id);
+    console.log(idx);
     if (idx === -1) {
       return false;
     } else {
