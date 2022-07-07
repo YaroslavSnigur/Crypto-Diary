@@ -10,6 +10,14 @@ function login(req, res) {
   res.render("login", { title: "Log In" });
 }
 
+function index(req, res) {
+  Trade.find({})
+  .populate("ind")
+  .exec(function (err, trades) {
+    res.render("trades/index", { trades });
+  });
+}
+
 function trade(req, res) {
   Trade.find({})
     .populate("ind")
@@ -141,6 +149,7 @@ function edit(req, res) {
 }
 
 module.exports = {
+  index,
   signUp,
   login,
   trade,

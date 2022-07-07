@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Update</title>
-  </head>
-  <body>
-    <h2>Update Your Trade</h2>
+<%- include('../partials/header.ejs') %>
+<div class="edit-trade-container">
+  <div><h2>Update Your Trade</h2></div>
+  <div class="edit-trade-container-form">
     <form action="/trades/<%= trade._id %>?_method=PUT" method="POST">
-      <label for="position"
-        >Position:
-        <select name="position" value="<%= trade.position %>">
+
+      <div class="edit-trade-row">
+      <div><label for="position">Position:</label></div>
+        <div><select name="position" value="<%= trade.position %>" id="position">
           <% if (trade.position === "Long"){%> 
           <option value="Long" selected>Long</option>
           <% } else {%> <option value="Long">Long</option>
@@ -20,11 +15,12 @@
           <option value="Short" selected>Short</option>
           <% } else {%> <option value="Short">Short</option>
           <% }; %>
-        </select> </label
-      ><br />
-      <label for="stat"
-        >Status:
-        <select name="stat" value="<%= trade.stat %>">
+        </select></div></div>
+
+      <div class="edit-trade-row">
+      <div><label for="stat">Status:</label></div>
+      <div>
+        <select name="stat" value="<%= trade.stat %>" id="stat">
           <% if (trade.stat === "Closed"){%>
           <option value="Closed" selected>Closed</option>
           <% } else {%> <option value="Closed">Closed</option>
@@ -33,61 +29,71 @@
           <option value="Opened" selected>Opened</option>
           <% } else {%> <option value="Opened">Opened</option>
           <% }; %>
-
-
-        </select> </label
-      ><br />
-      <label
-        >Pair:
-        <input type="text" name="pair" list="pair_list" value="<%= trade.pair %>">
+        </select> </div></div>
+      
+      
+        <div class="edit-trade-row">
+      <div><label for="pair">Pair:</label></div>
+      <div>
+        <input type="text" name="pair" list="pair_list" value="<%= trade.pair %>" id="pair">
         <datalist id="pair_list">
             <% cryptoData.symbols.forEach(function(p) { %>
               <option value="<%= p.symbol %>"><%= p.symbol %></option>
               <% }); %>
             </datalist>
-          </label>
-      <br />
-      <label for="openDate"
-        >Open Date:
-        <input type="date" name="openDate" value= <%= tradeDateOpen %> /> </label
-      ><br />
+          </div></div>
+      
 
-      <label for="openPrice"
-        >Open Price:
-        <input
+
+            <div class="edit-trade-row"> 
+              <div><label for="openDate" >Open Date:</label></div>
+                <div><input type="date" name="openDate" value="<%= tradeDateOpen %>" id="openDate" /></div></div>
+
+      <div class="edit-trade-row">
+      <div><label for="openPrice"
+        >Open Price:</label></div>
+        <div><input
           type="number"
           name="openPrice"
           value="<%= trade.openPrice %>"
-        /> </label
-      ><br />
+        /> </div></div>
 
-      <label for="quantity"
-        >Quantity:
-        <input
+      <div class="edit-trade-row">
+      <div><label for="quantity"
+        >Quantity:</label
+        ></div>
+        <div><input
           type="number"
           name="quantity"
           value="<%= trade.quantity %>"
-        /> </label
-      ><br />
+        /> </div></div>
 
-      <label for="closeDate"
-        >Close Date:
-        <input type="date" name="closeDate" value= <%= tradeDateClose %> /> </label
-      ><br />
+      <div class="edit-trade-row">
+      <div><label for="closeDate"
+        >Close Date:</label
+        ></div>
+       <div> <input type="date" name="closeDate" value= <%= tradeDateClose %> /> </div></div>
 
-      <label for="closePrice"
-        >Close Price:
-        <input
+      <div class="edit-trade-row">
+      <div><label for="closePrice"
+        >Close Price:</label
+        ></div>
+        <div><input
           type="number"
           name="closePrice"
           value="<%= trade.closePrice %>"
-        /> </label
-      ><br />
-      <label for="fees"
-        >Fees:
-        <input type="number" name="fees" value="<%= trade.fees %>" /> </label
-      ><br />
-      <input type="submit" value="Update Trade" />
+        /> </div></div>
+
+      <div class="edit-trade-row">
+      <div><label for="fees"
+        >Fees:</label
+        ></div>
+        <div><input type="number" name="fees" value="<%= trade.fees %>" /> </div></div>
+
+      <div class="edit-trade-row submit">
+      <input type="submit" value="Update Trade" /></div>
+
     </form>
-  </body>
-</html>
+    </div>
+  </div>
+    <%- include('../partials/footer.ejs') %>

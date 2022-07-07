@@ -15,6 +15,10 @@ body {
 
 /* Partials styling */
 
+#pair {
+  text-align: center;
+}
+
 .main-container {
   display: flex;
   justify-content: left;
@@ -185,14 +189,17 @@ ul {
 
 /* Add trade styling */
 
-.add-trade-container {
+.add-trade-container,
+.edit-trade-container,
+.dashboard-container {
   overflow-x: auto;
   margin-top: 40px;
   margin-left: 90px;
 }
 
 .add-trade-container-form,
-.add-indicator-form {
+.add-indicator-form,
+.edit-trade-container-form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -200,30 +207,41 @@ ul {
 }
 
 .add-trade-row,
-.add-indicator-row {
+.add-indicator-row,
+.edit-trade-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 5px;
 }
 
-.add-trade-row.submit {
+.add-trade-row.submit,
+.edit-trade-row.submit {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 10px;
 }
 
-input[type=text],
 input[type=date],
-input[type=number],
-textarea {
+input[type=number] {
   border: 1.5px solid #bbbbbb;
   border-radius: 4px;
   width: 150px;
   text-align: center;
   outline: none;
 }
+
+input[type=text],
+textarea {
+  border: 1.5px solid #bbbbbb;
+  border-radius: 4px;
+  width: 150px;
+  text-align: none;
+  outline: none;
+  padding-left: 5px;
+}
+
 
 input[type=text]:focus,
 input[type=date]:focus,
@@ -275,7 +293,7 @@ input[type=submit]:hover {
 }
 
 .add-indicator-btn {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .indicator-name {
@@ -390,6 +408,7 @@ input[type=submit]:hover {
   vertical-align: center;
   opacity: 0.6;
   transition: 0.3s;
+
 }
 
 .edit-edit-btn:hover,
@@ -426,9 +445,7 @@ input[type=submit].add-comment-btn:hover {
   align-items: center;
 }
 
-.table-comments>tr,
-th,
-td {
+.table-comments {
   font-size: 16px;
   text-align: left;
   vertical-align: center;
@@ -443,6 +460,7 @@ td {
   display: flex;
   flex-direction: column;
   justify-content: left;
+  margin-top: 15px;
 }
 
 input[type=submit].add-comment-btn {
@@ -459,4 +477,5 @@ input[type=submit].add-comment-btn {
   vertical-align: center;
   opacity: 0.6;
   transition: 0.3s;
+
 }

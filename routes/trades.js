@@ -4,7 +4,7 @@ const request = require("request");
 const tradesCtrl = require("../controllers/trades");
 
 router.get("/signup", tradesCtrl.signUp);
-router.get("/login", tradesCtrl.login);
+router.get("/trades/index", tradesCtrl.index);
 router.get("/trades/trades", tradesCtrl.trade);
 router.get("/trades/new", tradesCtrl.new);
 router.get("/trades/:id", tradesCtrl.show);

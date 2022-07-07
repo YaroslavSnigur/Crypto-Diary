@@ -68,17 +68,17 @@
   <% if (trade.comments.length) { %>
     <table class="table-comments">
       <thead>
-        <tr>
-          <th class="comments-date-column">Date created:</th>
-          <th class="comments-text-column">Text:</th>
+        <tr class="table-comments">
+          <th class="comments-date-column table-comments">Date created:</th>
+          <th class="comments-text-column table-comments">Text:</th>
         </tr>
       </thead>
       <tbody>
           <% trade.comments.sort((a, b) => a.createdAt - b.createdAt) %>
         <% trade.comments.forEach(function(t) { %>
-        <tr>
-          <td class="comments-date-column"><%= t.createdAt.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></td>
-          <td class="comments-text-column"><div class="comment-content"><%= t.content %> </div><div><form
+        <tr class="table-comments">
+          <td class="comments-date-column table-comments"><%= t.createdAt.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></td>
+          <td class="comments-text-column table-comments"><div class="comment-content"><%= t.content %> </div><div><form
             action="/trades/<%= trade._id %>/comments/<%= t._id %>?_method=delete"
             method="POST"
           >
@@ -91,7 +91,6 @@
     <% } else { %>
     No Comments Yet
     <% } %>
-    </br>
  <div class="add-comments-container">
   <div class="comments-header">Add a Comment</div>
 <form
