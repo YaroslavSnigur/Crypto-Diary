@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trades</title>
-  </head>
-  <body>
-    <h1>Trades</h1>
+<%- include('../partials/header.ejs') %>
+<div class="trade-table">
+  <div class="trade-header"><h2>Trades</h2></div>
+  <div>
     <table>
       <thead>
-        <tr>
+        <tr class="border_bottom">
           <th>Position</th>
           <th>Status</th>
           <th>Pair</th>
@@ -23,12 +17,29 @@
           <th>Fees Paid</th>
           <th>P/L USD</th>
           <th>P/L %</th>
+          <th>Details</th>
+          <th>Edit Trade</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        <% let pl = 0 %> <% let pr = 0 %> <% trades.forEach(function(t) { %>
-        <tr>
-          <td><%= t.position %></td>
+        <% trades.sort((a, b) => a.openDate - b.openDate) %> 
+        <% trades.sort(function(a, b){
+          if(a.stat < b.stat) { return 1; }
+          if(a.stat > b.stat) { return -1; }
+          return 0;
+      }) %> 
+        <% let pl = 0 %> <% let pr = 0 %> <%
+        trades.forEach(function(t) { %>
+        <tr class="border_bottom">
+          <td>
+            <%console.log(t.position);%> <% if (t.position === "Long"){%>
+            <span class="icon-long"
+              ><i class="fa-solid fa-arrow-trend-up"></i></span
+            ><% } else {%><span class="icon-short"
+              ><i class="fa-solid fa-arrow-trend-down"></i></span
+            ><% }; %>
+          </td>
           <td><%= t.stat %></td>
           <td><%= t.pair %></td>
           <td>
@@ -68,16 +79,25 @@
             <% if (t.closeDate && t.closePrice) {%> <%= Math.floor(pr) %>%<% }
             else { %> - <% } %>
           </td>
-          <td><a href="/trades/<%= t._id %>">DETAILS</a></td>
-          <td><a href="/trades/<%= t._id %>/edit">EDIT</a></td>
+          <td>
+            <a href="/trades/<%= t._id %>"
+              ><button class="button button-details">Details</button></a
+            >
+          </td>
+          <td>
+            <a href="/trades/<%= t._id %>/edit"
+              ><button class="button button-edit">Edit</button></a
+            >
+          </td>
           <td>
             <form action="/trades/<%= t._id %>/?_method=delete" method="POST">
-              <button>X</button>
+              <button class="button button-delete">X</button>
             </form>
           </td>
         </tr>
         <% }); %>
       </tbody>
     </table>
-  </body>
-</html>
+  </div>
+</div>
+<%- include('../partials/footer.ejs') %>

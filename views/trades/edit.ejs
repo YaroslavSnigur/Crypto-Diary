@@ -12,15 +12,29 @@
       <label for="position"
         >Position:
         <select name="position" value="<%= trade.position %>">
-          <option value="Long">Long</option>
-          <option value="Short">Short</option>
+          <% if (trade.position === "Long"){%> 
+          <option value="Long" selected>Long</option>
+          <% } else {%> <option value="Long">Long</option>
+          <% }; %>
+          <% if (trade.position === "Short"){%> 
+          <option value="Short" selected>Short</option>
+          <% } else {%> <option value="Short">Short</option>
+          <% }; %>
         </select> </label
       ><br />
       <label for="stat"
         >Status:
         <select name="stat" value="<%= trade.stat %>">
-          <option value="Closed">Closed</option>
-          <option value="Opened">Opened</option>
+          <% if (trade.stat === "Closed"){%>
+          <option value="Closed" selected>Closed</option>
+          <% } else {%> <option value="Closed">Closed</option>
+          <% }; %>
+          <% if (trade.stat === "Opened"){%>
+          <option value="Opened" selected>Opened</option>
+          <% } else {%> <option value="Opened">Opened</option>
+          <% }; %>
+
+
         </select> </label
       ><br />
       <label
