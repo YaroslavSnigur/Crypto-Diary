@@ -1,24 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+<%- include('../partials/header.ejs') %>
+<div class="add-indicator">
+<h2 class="indicator-header">Add Indicator</h2>
+<div class="add-indicator-form"></div>
+<div class="add-indicator-row">
     <p>
       Please first ensure that the Indicator is not in the dropdown
+    </p></div>
+    <div class="add-indicator-row">
       <select>
         <% indicators.forEach(function(i) { %>
         <option><%= i.name %></option>
         <% }) %>
-      </select>
-    </p>
+      </select></div>
+    
     <form action="/indicators" method="POST">
-      <label>Name:</label>
-      <input type="text" name="name" />
-      <input type="submit" value="Add Indicator" />
+      <div class="add-indicator-row indicator-name">
+      <label>Name:</label></div>
+      <div class="add-indicator-row"><input type="text" name="name" /></div>
+        <div class="add-indicator-row add-indicator-btn">
+      <input type="submit" value="Add Indicator" /></div>
+
     </form>
-  </body>
-</html>
+  </div>
+    <%- include('../partials/footer.ejs') %>

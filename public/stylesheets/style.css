@@ -13,84 +13,12 @@ body {
   background: #ffffff;
 }
 
+/* Partials styling */
+
 .main-container {
   display: flex;
   justify-content: left;
   align-items: center;
-}
-
-.trade-header {
-  margin-bottom: 0;
-}
-
-.trade-table {
-  overflow-x: auto;
-  margin-top: 40px;
-  margin-left: 90px;
-}
-
-table {
-  border-spacing: 0;
-  table-layout: fixed;
-}
-
-tr,
-th,
-td {
-  font-size: 11px;
-  text-align: center;
-  vertical-align: center;
-  padding: 0 8px;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  font-size: 12px;
-}
-
-.button {
-  border: none;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  width: 40px;
-  height: 25px;
-  border-radius: 10px;
-  opacity: 0.6;
-  transition: 0.3s;
-}
-
-.button:hover {
-  opacity: 1;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.24), 0 4px 12px 0 rgba(0, 0, 0, 0.19);
-}
-
-.button-details {
-  background-color: #4CAF50;
-}
-
-.button-edit {
-  background-color: #008CBA;
-}
-
-.button-delete {
-  background-color: #f44336;
-}
-
-.icon-long {
-  color: #006904;
-  font-size: 18px;
-}
-
-.icon-short {
-  color: #ff0000;
-  font-size: 18px;
-}
-
-ul {
-  line-height: 1.3em;
 }
 
 .top_navbar {
@@ -176,4 +104,174 @@ ul {
 .sidebar ul li a:hover {
   background: #0e94d4;
   color: #fff;
+}
+
+/* Trades table styling */
+
+.trade-header {
+  margin-bottom: 0;
+}
+
+.trade-table {
+  overflow-x: auto;
+  margin-top: 40px;
+  margin-left: 90px;
+}
+
+table {
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+tr,
+th,
+td {
+  font-size: 11px;
+  text-align: center;
+  vertical-align: center;
+  padding: 0 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  font-size: 12px;
+}
+
+.button {
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  width: 40px;
+  height: 25px;
+  border-radius: 10px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.button:hover {
+  opacity: 1;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.24), 0 4px 12px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button-details {
+  background-color: #4CAF50;
+}
+
+.button-edit {
+  background-color: #008CBA;
+}
+
+.button-delete {
+  background-color: #f44336;
+}
+
+.icon-long {
+  color: #006904;
+  font-size: 18px;
+}
+
+.icon-short {
+  color: #ff0000;
+  font-size: 18px;
+}
+
+ul {
+  line-height: 1.3em;
+}
+
+/* Add trade styling */
+
+.add-trade-container {
+  overflow-x: auto;
+  margin-top: 40px;
+  margin-left: 90px;
+}
+
+.add-trade-container-form,
+.add-indicator-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 250px;
+}
+
+.add-trade-row,
+.add-indicator-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.add-trade-row.submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+input[type=text],
+input[type=date],
+input[type=number] {
+  border: 1.5px solid #bbbbbb;
+  border-radius: 4px;
+  width: 150px;
+  text-align: center;
+  outline: none;
+}
+
+input[type=text]:focus,
+input[type=date]:focus,
+input[type=number]:focus {
+  outline: auto;
+  outline-color: #0e94d4;
+}
+
+select {
+  width: 150px;
+  border: 1.5px solid #bbbbbb;
+  border-radius: 4px;
+  text-align: center;
+  outline: none;
+}
+
+select:focus {
+  outline: auto;
+  outline-color: #0e94d4;
+}
+
+input[type=submit] {
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.24), 0 4px 12px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Add indicator styling */
+
+.add-indicator {
+  overflow-x: auto;
+  margin-top: 40px;
+  margin-left: 90px;
+}
+
+.add-indicator-btn {
+  margin-top: 10px;
+}
+
+.indicator-name {
+  margin-bottom: 0;
 }

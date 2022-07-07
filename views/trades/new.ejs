@@ -1,59 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h2>Enter a New Trade</h2>
+<%- include('../partials/header.ejs') %>
+<div class="add-trade-container">
+    <div><h2>Enter a New Trade</h2></div>
+    <div class="add-trade-container-form">
+      
     <form action="/trades/trades" method="POST">
-      <label
-        >Position:
-        <select name="position">
+      <div class="add-trade-row">
+      <div><label for="position">Position:</label></div>
+        <div><select name="position" id="position">
           <option value="Long" selected>Long</option>
           <option value="Short">Short</option>
-        </select> </label
-      ><br />
-      <label
-        >Status:
-        <select name="stat">
+        </select> </div></div>
+
+        <div class="add-trade-row">    
+          <div><label for="stat">Status:</label></div>
+          <div><select name="stat" id="stat">
           <option value="Closed" selected>Closed</option>
           <option value="Opened">Opened</option>
-        </select> </label
-      ><br />
-      <label
-        >Pair:
-        <input type="text" name="pair" list="pair_list" placeholder="Choose a pair" />
+        </select> </div></div>
+
+        <div class="add-trade-row"> 
+          <div> <label for="pair">Pair:</label></div>
+            <div>
+        <input type="text" name="pair" list="pair_list" placeholder="Choose a pair" id="pair" />
         <datalist id="pair_list">
           <% cryptoData.symbols.forEach(function(p) { %>
           <option value="<%= p.symbol %>"><%= p.symbol %></option>
           <% }); %>
-        </datalist> </label
-      ><br />
-      <label
-        >Open Date:
-        <input type="date" name="openDate" value="<%= tradeDate %>" /> </label
-      ><br />
+        </datalist> </div></div>
+        <div class="add-trade-row"> 
+      <div><label for="openDate" >Open Date:</label></div>
+        <div><input type="date" name="openDate" value="<%= tradeDate %>" id="openDate" /></div></div>
+       
+        <div class="add-trade-row">
+     <div> <label for="openPrice">Open Price:</label></div> <div><input type="number" name="openPrice" value ="0" id="openPrice"/></div></div>
 
-      <label>Open Price: <input type="number" name="openPrice" value ="0" /> </label><br />
+     <div class="add-trade-row">
+      <div><label for="quantity">Quantity:</label> </div><div><input type="number" name="quantity" value ="0" id="quantity"></div></div>
 
-      <label>Quantity: <input type="number" name="quantity" value ="0"> </label><br />
+      <div class="add-trade-row">
+      <div><label for="closeDate">Close Date: </label></div><div><input type="date" name="closeDate" id="closeDate"/> </div></div>
 
-      <label>Close Date: <input type="date" name="closeDate" /> </label><br />
+      <div class="add-trade-row">
+      <div><label for="closePrice">Close Price:</label></div> <div><input type="number" name="closePrice" value ="0" id="closePrice"/> </div></div>
 
-      <label>Close Price: <input type="number" name="closePrice" value ="0"/> </label
-      ><br />
-      <label>Fees: <input type="number" name="fees" value ="0"/> </label><br />
-      <label
-      >Indicators:
-      <select name="ind" multiple>
+      <div class="add-trade-row">
+      <div><label for="fees">Fees:</label></div> <div><input type="number" name="fees" value ="0" id="fees"/> </div></div>
+
+      <div class="add-trade-row">
+      <div><label for="ind">Indicators:</label></div>
+      <div><select name="ind" multiple id="ind">
         <% indicators.forEach(function(i) { %>
         <option multiple value="<%= i._id %>"><%= i.name %></option>
-        <% }); %> 
-        </label>
-      <input type="submit" value="Add Trade" />
+        <% }); %>  </select></div></div>
+        
+        <div class="add-trade-row submit">
+         <input type="submit" value="Add Trade"/></div>
+      
     </form>
-  </body>
-</html>
+  </div>
+</div>
+    <%- include('../partials/footer.ejs') %>
