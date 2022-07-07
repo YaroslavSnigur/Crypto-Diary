@@ -216,7 +216,8 @@ ul {
 
 input[type=text],
 input[type=date],
-input[type=number] {
+input[type=number],
+textarea {
   border: 1.5px solid #bbbbbb;
   border-radius: 4px;
   width: 150px;
@@ -226,7 +227,8 @@ input[type=number] {
 
 input[type=text]:focus,
 input[type=date]:focus,
-input[type=number]:focus {
+input[type=number]:focus,
+textarea:focus {
   outline: auto;
   outline-color: #0e94d4;
 }
@@ -319,7 +321,8 @@ input[type=submit]:hover {
   align-items: center;
 }
 
-.indicators-header {
+.indicators-header,
+.comments-header {
   font-weight: bold;
 }
 
@@ -351,7 +354,8 @@ input[type=submit]:hover {
   transition: 0.3s;
 }
 
-.delete-indicator-btn {
+.delete-indicator-btn,
+.delete-comment-btn {
   border: none;
   color: rgb(255, 255, 255);
   text-align: center;
@@ -372,12 +376,87 @@ input[type=submit]:hover {
   align-items: center;
 }
 
+.add-indicator-btn {
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  cursor: pointer;
+  vertical-align: center;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
 .edit-edit-btn:hover,
-.delete-indicator-btn:hover {
+.delete-indicator-btn:hover,
+.add-indicator-btn:hover,
+.delete-comment-btn:hover,
+input[type=submit].add-comment-btn:hover {
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.24), 0 4px 12px 0 rgba(0, 0, 0, 0.19);
   opacity: 1;
 }
 
 .edit-edit-btn a {
   color: rgb(255, 255, 255);
+}
+
+.comments-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-date-column {
+  margin-right: 10px;
+  width: 150px;
+  padding: 0;
+}
+
+.comments-text-column {
+  margin-right: 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.table-comments>tr,
+th,
+td {
+  font-size: 16px;
+  text-align: left;
+  vertical-align: center;
+  border-bottom: none;
+}
+
+.comment-content {
+  margin-right: 10px;
+}
+
+.add-comments-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+input[type=submit].add-comment-btn {
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  cursor: pointer;
+  vertical-align: center;
+  opacity: 0.6;
+  transition: 0.3s;
 }

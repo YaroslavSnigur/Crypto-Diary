@@ -57,50 +57,50 @@
     <option value="${i._id}">${i.name}</option>
     `).join('') %>
   </select>
-  <button type="submit">Add Indicators</button>
+  <button type="submit" class = "add-indicator-btn">Add Indicator</button>
 </form></div></div></div>
 
 
 
 
 <div class="comments-container">
-<h2>Comments:</h2>
-<% if (trade.comments.length) { %>
-  <table>
-    <thead>
-      <tr>
-        <th>Date created:</th>
-        <th>Text:</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% trade.comments.sort((a, b) => a.createdAt - b.createdAt) %>
-      <% trade.comments.forEach(function(t) { %>
-      <tr>
-        <td><%= t.createdAt.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></td>
-        <td><%= t.content %></d></td>
-        <td> 
-            <form
+  <div class="comments-header">Comments:</div>
+  <% if (trade.comments.length) { %>
+    <table class="table-comments">
+      <thead>
+        <tr>
+          <th class="comments-date-column">Date created:</th>
+          <th class="comments-text-column">Text:</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% trade.comments.sort((a, b) => a.createdAt - b.createdAt) %>
+        <% trade.comments.forEach(function(t) { %>
+        <tr>
+          <td class="comments-date-column"><%= t.createdAt.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></td>
+          <td class="comments-text-column"><div class="comment-content"><%= t.content %> </div><div><form
             action="/trades/<%= trade._id %>/comments/<%= t._id %>?_method=delete"
             method="POST"
           >
-            <button>X</button>
-          </form></td>
-      </tr>
-      <% }); %>
-    </tbody>
-  </table>
-  <% } else { %>
-  <h5>No Comments Yet</h5>
-  <% } %>
-  <br />
-  <h2>Add Comment</h2>
+            <button class ="delete-comment-btn">X</button>
+          </form></div></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    No Comments Yet
+    <% } %>
+    </br>
+ <div class="add-comments-container">
+  <div class="comments-header">Add a Comment</div>
 <form
   method="POST"
   action="/trades/<%= trade._id %>/comments"
 >
-  <textarea name="content"></textarea>
-  <input type="submit" value="Add Comment" />
-</form></div>
+<div>
+  <textarea name="content"></textarea></div>
+  <div> <input class="add-comment-btn" type="submit" value="Add Comment" /></div>
+</form></div></div></div>
 </div>
 <%- include('../partials/footer.ejs') %>
