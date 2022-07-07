@@ -25,6 +25,53 @@ body {
   align-items: center;
 }
 
+.stats-container {
+  font-size: 18px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.container .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+}
+
+/* .container .box h2 {
+  display: block;
+  color: rgb(0, 0, 0);
+  width: 150px;
+} */
+
+.container .box .chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 40px;
+  line-height: 160px;
+  height: 160px;
+  color: rgb(0, 0, 0);
+}
+
+
+.container .box canvas {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 25px;
+  width: 100%;
+  width: 100%;
+}
+
+
 .top_navbar {
   position: fixed;
   top: 0;

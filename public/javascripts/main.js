@@ -17,3 +17,14 @@ li_items.forEach((li_item) => {
 hamburger.addEventListener("click", () => {
   hamburger.closest(".wrapper").classList.toggle("hover_collapse");
 });
+
+$(function() {
+  $('.chart').easyPieChart({
+    size: 160,
+    barColor: "#36e617",
+    scaleLength: 0,
+    lineWidth: 15,
+    trackColor: "#525151",
+    lineCap: "circle",
+    animate: 2000,
+  }); });

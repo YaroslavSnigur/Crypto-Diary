@@ -33,7 +33,7 @@
         trades.forEach(function(t) { %>
         <tr class="border_bottom">
           <td>
-            <%console.log(t.position);%> <% if (t.position === "Long"){%>
+            <% if (t.position === "Long"){%>
             <span class="icon-long"
               ><i class="fa-solid fa-arrow-trend-up"></i></span
             ><% } else {%><span class="icon-short"
