@@ -1,52 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade</title>
-</head>
-<body>
-    <h1>Trade</h1>
-    <section>
-        <div>Position:</div>
-        <div><%= trade.position %></div>
-        <div>Status:</div>
-        <div><%= trade.stat %></div>
-        <div>Pair:</div>
-        <div><%= trade.pair %></div>
-        <div>Open Date:</div>
-        <div><%= trade.openDate.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></div>
-        <div>Open Price:</div>
-        <div><%= trade.openPrice %></div>
-        <div>Quantity:</div>
-        <div><%= trade.quantity %></div>
-        <div>Close Date:</div>
-        <div> <% if (trade.closeDate) {%> <%= trade.closeDate.toLocaleDateString('en-GB',
-          {timeZone: 'UTC'}) %> <% } else { %> - <% } %></div>
-        <div>Close Price:<div>
+<%- include('../partials/header.ejs') %>
+<div class="trade-details-container">
+  <div><h2>Trade Details</h2></div>
+  <div class="trade-details-indicators-container">
+    <div class="trade-details">
+      <div class="trade-details-row"> <div>Position:</div>
+      <div><%= trade.position %></div></div>
+       <div class="trade-details-row"><div>Status:</div>
+       <div><%= trade.stat %></div></div>
+        <div class="trade-details-row"><div>Pair:</div>
+        <div><%= trade.pair %></div></div>
+        <div class="trade-details-row"><div>Open Date:</div>
+        <div><%= trade.openDate.toLocaleDateString('en-GB', {timeZone: 'UTC'}) %></div></div>
+        <div class="trade-details-row"><div>Open Price:</div>
+        <div><%= trade.openPrice %></div></div>
+        <div class="trade-details-row"> <div>Quantity:</div>
+        <div><%= trade.quantity %></div></div>
+       <div class="trade-details-row"> <div>Close Date:</div>
+       <div> <% if (trade.closeDate) {%> <%= trade.closeDate.toLocaleDateString('en-GB',
+         {timeZone: 'UTC'}) %> <% } else { %> - <% } %></div></div>
+       <div class="trade-details-row">  <div>Close Price:</div>
         <div><% if (trade.closePrice) {%> <%= trade.closePrice %> <% } else { %> - <% }
-          %></div>
-        <div>Fees Paid:</div>
-        <div><% if (trade.fees) {%> <%= trade.fees %> <% } else { %> - <% } %></div>
-        <div><a href="/trades/<%= trade._id %>/edit">EDIT</a><div>
-      </section>
-      <br />
+          %></div></div>
+      <div class="trade-details-row"> <div>Fees Paid:</div>
+      <div><% if (trade.fees) {%> <%= trade.fees %> <% } else { %> - <% } %></div></div>
+       
+        <div class="trade-details-row"><div class="edit-edit-btn"><a href="/trades/<%= trade._id %>/edit">Edit</a></div></div>
+      </div>
 
-      <div>Indicators used for trade:</div>
+      <div class="indicators-container">
+      <div class="indicators-header">Indicators used for trade:</div>
+      <div class="indicator-list">
+        <div class="indicators">
       <% if (trade.ind.length) { %>
-      <ul>
+      
         <%- trade.ind.map(i => `
-        <li>${i.name}</li><form
+        <div class="indicators-elements">
+        <div>${i.name}</div>
+       <div ><form class="delete-indicator"
         action="/trades/${trade._id}/indicators/${i._id}?_method=delete"
         method="POST"
-      > <button>X</button></form>
+      > <button class = "delete-indicator-btn"><span>X</span></button></form></div></div>
       `).join('') %>
-      </ul>
       <% } else { %>
-        <h5>No Indicators</h5>
+        No Indicators
         <% } %>
+      </div>
 
+
+<div></div>
       <form
   action="/trades/<%= trade._id %>/indicators"
   method="POST"
@@ -57,8 +58,12 @@
     `).join('') %>
   </select>
   <button type="submit">Add Indicators</button>
-</form>
+</form></div></div></div>
 
+
+
+
+<div class="comments-container">
 <h2>Comments:</h2>
 <% if (trade.comments.length) { %>
   <table>
@@ -96,6 +101,6 @@
 >
   <textarea name="content"></textarea>
   <input type="submit" value="Add Comment" />
-</form>
-</body>
-</html>
+</form></div>
+</div>
+<%- include('../partials/footer.ejs') %>

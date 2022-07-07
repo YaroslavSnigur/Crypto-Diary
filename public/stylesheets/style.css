@@ -69,6 +69,7 @@ body {
   width: 220px;
   height: 100%;
   background: #bbbbbb;
+  z-index: 9999;
 }
 
 .sidebar ul li a {
@@ -254,10 +255,13 @@ input[type=submit] {
   border-radius: 10px;
   background-color: #4CAF50;
   cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
 }
 
 input[type=submit]:hover {
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.24), 0 4px 12px 0 rgba(0, 0, 0, 0.19);
+  opacity: 1;
 }
 
 /* Add indicator styling */
@@ -274,4 +278,106 @@ input[type=submit]:hover {
 
 .indicator-name {
   margin-bottom: 0;
+}
+
+/* Add indicator styling */
+.trade-details-container {
+  overflow-x: auto;
+  margin-top: 40px;
+  margin-left: 90px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trade-details-indicators-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.indicators-container {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.indicator-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.indicators-elements {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.indicators-header {
+  font-weight: bold;
+}
+
+.trade-details {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.trade-details-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.edit-edit-btn {
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #0e94d4;
+  cursor: pointer;
+  vertical-align: center;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.delete-indicator-btn {
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  vertical-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: 30px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #ff0000;
+  cursor: pointer;
+  vertical-align: center;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-edit-btn:hover,
+.delete-indicator-btn:hover {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.24), 0 4px 12px 0 rgba(0, 0, 0, 0.19);
+  opacity: 1;
+}
+
+.edit-edit-btn a {
+  color: rgb(255, 255, 255);
 }
