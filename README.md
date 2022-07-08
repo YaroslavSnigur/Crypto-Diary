@@ -41,6 +41,8 @@ Finally you can add your trades, indicators, comments, modify and delete them.
 
 ### Link to the Application
 
+https://crypto-diary.herokuapp.com/trades/index
+
 ## Future Additions
 
 In the future I would like to add and improve:
