@@ -29,6 +29,7 @@ Technologies used to create this application:
 - Node.js
 - Express.js
 - EJS
+- API
 - MongoDB
 - Mongoose
 - Heroku
