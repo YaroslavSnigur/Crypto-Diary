@@ -2,8 +2,8 @@
 
 ## About the Application
 
-Login: Yara
-Pass: yara
+# Login: Yara
+# Pass: yara
 
 Crypto-Diary is an application where you can track your lamba approaching you! 
 
